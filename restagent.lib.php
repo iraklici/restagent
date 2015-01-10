@@ -437,7 +437,7 @@ class Request {
    *
    * @throws RestAgentException
    */
-  private function check_status($resp_code) {
+  public function check_status($resp_code) {
     //$resp_code = curl_getinfo($this->curl, CURLINFO_HTTP_CODE);
 
     if ($resp_code < 199 || $resp_code > 399) {
