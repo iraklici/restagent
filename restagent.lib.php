@@ -290,8 +290,6 @@ class Request {
 
     $this->reset();
     
-    //$this->check_status($response, $full_url);
-
     $header_size = curl_getinfo($this->curl, CURLINFO_HEADER_SIZE);
     $headers = substr($response, 0, $header_size);
     $content = substr($response, $header_size);
@@ -439,10 +437,10 @@ class Request {
    *
    * @throws RestAgentException
    */
-  private function check_status($response, $full_url) {
-    $resp_code = curl_getinfo($this->curl, CURLINFO_HTTP_CODE);
+  private function check_status($resp_code) {
+    //$resp_code = curl_getinfo($this->curl, CURLINFO_HTTP_CODE);
 
-    if ($resp_code < 199 || $resp_code > 399 || !empty($response['decoded']->error)) {
+    if ($resp_code < 199 || $resp_code > 399) {
       $msg = "Server returned: \"HTTP 1.1. $resp_code\" \nURL: $full_url \nERROR: " . $response['json'];
       throw new RestAgentException($msg);
     }
